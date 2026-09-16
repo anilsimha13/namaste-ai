@@ -5,6 +5,7 @@
 - Season 1
   - [Episode-01 | Welcome to Namaste AI](#episode-01--welcome-to-namaste-ai)
   - [Episode-02 | The Evolution of AI](#episode-02--the-evolution-of-ai)
+  - [Episode-03 | Does ChatGPT Know or Does It Guess](#episode-03--does-chatgpt-know-or-does-it-guess)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -55,3 +56,16 @@
 - _Generative AI_
   - Generative AI refers to a class of AI models that can generate new content, such as text, images, or music, based on the patterns learned from existing data. Generative models, such as Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs), have been used to create realistic images, videos, and audio.
   - Generative AI has applications in creative industries, content generation, and data augmentation. It has the potential to revolutionize fields such as art, design, and entertainment by enabling the creation of novel and diverse content.
+
+#### Episode-03 | Does ChatGPT Know or Does It Guess
+
+- _Inference_
+  - Inference is the process of drawing conclusions or making predictions based on available information or evidence. In the context of AI and machine learning, inference refers to the process of using a trained model to make predictions or generate outputs based on new input data.
+  - Inference can be performed in various ways, depending on the type of model and the task at hand. For example, in supervised learning, inference involves using a trained model to predict the output for new input data. In unsupervised learning, inference may involve clustering or dimensionality reduction to uncover patterns in the data.
+  - Inference is a critical step in the deployment of AI models, as it allows them to be used in real-world applications. The efficiency and accuracy of inference can significantly impact the performance and usability of AI systems.
+- _Hallucination_
+  - Hallucination in AI refers to the phenomenon where a model generates outputs that are not grounded in reality or factual information. This can occur when a model produces responses that are plausible-sounding but factually incorrect or misleading.
+  - Hallucination can be a significant challenge in natural language processing and generative AI, as it can lead to the dissemination of false information and reduce the trustworthiness of AI systems. Researchers are actively working on methods to mitigate hallucination and improve the reliability of AI-generated content.
+- _Retrieval-Augmented Generation (RAG)_
+  - Retrieval-Augmented Generation is a technique that combines the strengths of retrieval-based methods and generative models to improve the quality and accuracy of AI-generated content. RAG involves retrieving relevant information from external sources and using it to inform the generation process, allowing for more contextually accurate and factually grounded outputs.
+  - RAG has applications in various domains, including question answering, summarization, and conversational AI. By leveraging external knowledge sources, RAG can help mitigate hallucination and enhance the reliability of AI-generated responses.
