@@ -6,6 +6,7 @@
   - [Episode-01 | Welcome to Namaste AI](#episode-01--welcome-to-namaste-ai)
   - [Episode-02 | The Evolution of AI](#episode-02--the-evolution-of-ai)
   - [Episode-03 | Does ChatGPT Know or Does It Guess](#episode-03--does-chatgpt-know-or-does-it-guess)
+  - [Episode-04 | The Secret Language of LLMs](#episode-04--the-secret-language-of-llms)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -69,3 +70,13 @@
 - _Retrieval-Augmented Generation (RAG)_
   - Retrieval-Augmented Generation is a technique that combines the strengths of retrieval-based methods and generative models to improve the quality and accuracy of AI-generated content. RAG involves retrieving relevant information from external sources and using it to inform the generation process, allowing for more contextually accurate and factually grounded outputs.
   - RAG has applications in various domains, including question answering, summarization, and conversational AI. By leveraging external knowledge sources, RAG can help mitigate hallucination and enhance the reliability of AI-generated responses.
+
+#### Episode-04 | The Secret Language of LLMs
+
+- _Tokens_:
+  - Tokens are the basic units of text that are processed by language models. In natural language processing, a token can be a word, subword, or character, depending on the tokenization method used. Tokenization is the process of breaking down text into these smaller units for analysis and modeling.
+  - The choice of tokenization method can significantly impact the performance of language models, as it affects how the model represents and understands text. Common tokenization methods include word-level tokenization, subword tokenization (e.g., Byte Pair Encoding), and character-level tokenization.
+
+- _Context Window_:
+  - The context window refers to the span of text that a language model can consider when generating predictions or outputs. It defines the amount of preceding text that the model can use to inform its understanding of the current input.
+  - The size of the context window can affect the model's ability to capture long-range dependencies and maintain coherence in generated text. Larger context windows allow models to consider more information, while smaller windows may limit their understanding of context.
