@@ -7,6 +7,7 @@
   - [Episode-02 | The Evolution of AI](#episode-02--the-evolution-of-ai)
   - [Episode-03 | Does ChatGPT Know or Does It Guess](#episode-03--does-chatgpt-know-or-does-it-guess)
   - [Episode-04 | The Secret Language of LLMs](#episode-04--the-secret-language-of-llms)
+  - [Episode-05 | How Machines Represent Meaning](#episode-05--how-machines-represent-meaning)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -80,3 +81,11 @@
 - _Context Window_:
   - The context window refers to the span of text that a language model can consider when generating predictions or outputs. It defines the amount of preceding text that the model can use to inform its understanding of the current input.
   - The size of the context window can affect the model's ability to capture long-range dependencies and maintain coherence in generated text. Larger context windows allow models to consider more information, while smaller windows may limit their understanding of context.
+
+  #### Episode-05 | How Machines Represent Meaning
+  - _Vectorisation_:
+    - Vectorization is the process of converting text or other data into numerical representations (vectors) that can be processed by machine learning models. In natural language processing, vectorization allows models to capture semantic meaning and relationships between words or phrases.
+    - Common vectorization techniques include one-hot encoding, term frequency-inverse document frequency (TF-IDF), and word embeddings (e.g., Word2Vec, GloVe). More advanced methods, such as contextual embeddings from transformer models (e.g., BERT), capture richer semantic information by considering the context in which words appear.
+  - _Embeddings_:
+    - Embeddings are dense vector representations of data that capture semantic meaning and relationships between entities. In natural language processing, word embeddings represent words in a continuous vector space, where semantically similar words are located closer together.
+    - Embeddings can be learned from large corpora of text using techniques such as Word2Vec, GloVe, or transformer-based models like BERT. They enable models to understand the meaning of words and phrases in context, facilitating tasks such as text classification, sentiment analysis, and information retrieval.
