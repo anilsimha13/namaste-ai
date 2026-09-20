@@ -8,6 +8,7 @@
   - [Episode-03 | Does ChatGPT Know or Does It Guess](#episode-03--does-chatgpt-know-or-does-it-guess)
   - [Episode-04 | The Secret Language of LLMs](#episode-04--the-secret-language-of-llms)
   - [Episode-05 | How Machines Represent Meaning](#episode-05--how-machines-represent-meaning)
+  - [Episode-06 | The Computational Brain of Machines](#episode-06--the-computational-brain-of-machines)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -89,3 +90,14 @@
   - _Embeddings_:
     - Embeddings are dense vector representations of data that capture semantic meaning and relationships between entities. In natural language processing, word embeddings represent words in a continuous vector space, where semantically similar words are located closer together.
     - Embeddings can be learned from large corpora of text using techniques such as Word2Vec, GloVe, or transformer-based models like BERT. They enable models to understand the meaning of words and phrases in context, facilitating tasks such as text classification, sentiment analysis, and information retrieval.
+
+    #### Episode-06 | The Computational Brain of Machines
+    - _GPT_
+      - GPT (Generative Pre-trained Transformer) is a type of large language model developed by OpenAI. It is based on the transformer architecture and is pre-trained on vast amounts of text data to learn patterns and relationships in language. GPT can generate coherent and contextually relevant text, making it suitable for various natural language processing tasks.
+      - The GPT model consists of multiple layers of transformer blocks, each containing self-attention mechanisms and feedforward neural networks. During pre-training, the model learns to predict the next word in a sentence, allowing it to capture syntactic and semantic information.
+      - GPT has been used in applications such as chatbots, content generation, translation, and summarization. Its ability to generate human-like text has made it a powerful tool for natural language understanding and generation.
+
+  - _Transformers_
+    - Transformers are a type of neural network architecture that has revolutionized the field of natural language processing. They use self-attention mechanisms to process input data in parallel, allowing for more efficient training and better performance on a wide range of NLP tasks.
+    - The transformer architecture consists of an encoder-decoder structure, where the encoder processes the input sequence and generates a context-aware representation, while the decoder generates the output sequence based on this representation. This architecture enables transformers to capture long-range dependencies and relationships in text.
+    - Transformers have been used in various state-of-the-art models, including BERT, GPT, and T5, enabling applications such as question answering, text summarization, and machine translation.
