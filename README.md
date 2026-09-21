@@ -83,21 +83,34 @@
   - The context window refers to the span of text that a language model can consider when generating predictions or outputs. It defines the amount of preceding text that the model can use to inform its understanding of the current input.
   - The size of the context window can affect the model's ability to capture long-range dependencies and maintain coherence in generated text. Larger context windows allow models to consider more information, while smaller windows may limit their understanding of context.
 
-  #### Episode-05 | How Machines Represent Meaning
-  - _Vectorisation_:
-    - Vectorization is the process of converting text or other data into numerical representations (vectors) that can be processed by machine learning models. In natural language processing, vectorization allows models to capture semantic meaning and relationships between words or phrases.
-    - Common vectorization techniques include one-hot encoding, term frequency-inverse document frequency (TF-IDF), and word embeddings (e.g., Word2Vec, GloVe). More advanced methods, such as contextual embeddings from transformer models (e.g., BERT), capture richer semantic information by considering the context in which words appear.
-  - _Embeddings_:
-    - Embeddings are dense vector representations of data that capture semantic meaning and relationships between entities. In natural language processing, word embeddings represent words in a continuous vector space, where semantically similar words are located closer together.
-    - Embeddings can be learned from large corpora of text using techniques such as Word2Vec, GloVe, or transformer-based models like BERT. They enable models to understand the meaning of words and phrases in context, facilitating tasks such as text classification, sentiment analysis, and information retrieval.
+#### Episode-05 | How Machines Represent Meaning
 
-    #### Episode-06 | The Computational Brain of Machines
+- _Vectorisation_:
+  - Vectorization is the process of converting text or other data into numerical representations (vectors) that can be processed by machine learning models. In natural language processing, vectorization allows models to capture semantic meaning and relationships between words or phrases.
+  - Common vectorization techniques include one-hot encoding, term frequency-inverse document frequency (TF-IDF), and word embeddings (e.g., Word2Vec, GloVe). More advanced methods, such as contextual embeddings from transformer models (e.g., BERT), capture richer semantic information by considering the context in which words appear.
+- _Embeddings_:
+  - Embeddings are dense vector representations of data that capture semantic meaning and relationships between entities. In natural language processing, word embeddings represent words in a continuous vector space, where semantically similar words are located closer together.
+  - Embeddings can be learned from large corpora of text using techniques such as Word2Vec, GloVe, or transformer-based models like BERT. They enable models to understand the meaning of words and phrases in context, facilitating tasks such as text classification, sentiment analysis, and information retrieval.
+
+#### Episode-06 | The Computational Brain of Machines
+
     - _GPT_
       - GPT (Generative Pre-trained Transformer) is a type of large language model developed by OpenAI. It is based on the transformer architecture and is pre-trained on vast amounts of text data to learn patterns and relationships in language. GPT can generate coherent and contextually relevant text, making it suitable for various natural language processing tasks.
       - The GPT model consists of multiple layers of transformer blocks, each containing self-attention mechanisms and feedforward neural networks. During pre-training, the model learns to predict the next word in a sentence, allowing it to capture syntactic and semantic information.
       - GPT has been used in applications such as chatbots, content generation, translation, and summarization. Its ability to generate human-like text has made it a powerful tool for natural language understanding and generation.
 
-  - _Transformers_
-    - Transformers are a type of neural network architecture that has revolutionized the field of natural language processing. They use self-attention mechanisms to process input data in parallel, allowing for more efficient training and better performance on a wide range of NLP tasks.
-    - The transformer architecture consists of an encoder-decoder structure, where the encoder processes the input sequence and generates a context-aware representation, while the decoder generates the output sequence based on this representation. This architecture enables transformers to capture long-range dependencies and relationships in text.
-    - Transformers have been used in various state-of-the-art models, including BERT, GPT, and T5, enabling applications such as question answering, text summarization, and machine translation.
+- _Transformers_
+  - Transformers are a type of neural network architecture that has revolutionized the field of natural language processing. They use self-attention mechanisms to process input data in parallel, allowing for more efficient training and better performance on a wide range of NLP tasks.
+  - The transformer architecture consists of an encoder-decoder structure, where the encoder processes the input sequence and generates a context-aware representation, while the decoder generates the output sequence based on this representation. This architecture enables transformers to capture long-range dependencies and relationships in text.
+  - Transformers have been used in various state-of-the-art models, including BERT, GPT, and T5, enabling applications such as question answering, text summarization, and machine translation.
+
+#### Episode-07 | Sharpening the Brain
+
+- A neural network contains huge collection of adjustable parameters (weights) that are learned during training. The process of training a neural network involves adjusting these weights to minimize the difference between the predicted output and the actual output (ground truth). This is typically done using optimization algorithms such as stochastic gradient descent (SGD) and backpropagation.
+- `Forward Pass`: During the forward pass, the input data is passed through the network layer by layer, and the output is computed based on the current weights. The predicted output is then compared to the actual output to calculate the loss (error).
+- `Loss Function`: The loss function quantifies the difference between the predicted output and the actual output. Common loss functions include mean squared error (MSE) for regression tasks and cross-entropy loss for classification tasks. The choice of loss function depends on the specific task and the nature of the data.
+- `Backpropagation`: Backpropagation is the process of computing the gradients of the loss function with respect to the weights of the network. This is done by applying the chain rule of calculus to propagate the error backward through the network, layer by layer.
+- `Gradient Descent`: Gradient descent is an optimization algorithm used to update the weights of the network based on the computed gradients. The weights are adjusted in the direction that minimizes the loss function, with the learning rate determining the step size of the updates.
+- `Generalization`: Generalization refers to the ability of a trained neural network to perform well on unseen data. A model that generalizes well can make accurate predictions on new inputs, while a model that overfits may perform poorly on unseen data. Techniques such as regularization, dropout, and early stopping are used to improve generalization and prevent overfitting.
+- `Overfitting`: Overfitting occurs when a neural network learns the training data too well, capturing noise and irrelevant patterns that do not generalize to new data. This can lead to poor performance on unseen inputs. To mitigate overfitting, techniques such as cross-validation, regularization, and data augmentation are employed.
+- `Distributed Training`: Distributed training involves training a neural network across multiple devices or machines to speed up the training process and handle larger datasets. Techniques such as data parallelism and model parallelism are used to distribute the workload and synchronize updates across devices.

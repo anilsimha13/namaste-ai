@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformer Architecture — Attention Is All You Need</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f172a;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2.5rem 1rem 3rem;
+  }
+  header { text-align: center; margin-bottom: 2rem; }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.025em;
+  }
+  .cite {
+    font-size: 0.82rem;
+    color: #475569;
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+  .wrap {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    overflow-x: auto;
+    max-width: 100%;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+  svg text { user-select: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Transformer Architecture</h1>
+  <p class="cite">Vaswani et al., "Attention Is All You Need" — NeurIPS 2017</p>
+</header>
+
+<div class="wrap">
+<svg width="820" height="990" viewBox="0 0 820 990" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Arrow markers -->
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+  </marker>
+  <marker id="arr-gold" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#d97706"/>
+  </marker>
+</defs>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                      ENCODER                           -->
+<!--                  center x = 181                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<!-- Section label -->
+<text x="181" y="48" text-anchor="middle" font-size="15" font-weight="700"
+      fill="#94a3b8" letter-spacing="0.12em">ENCODER</text>
+
+<!-- N× dashed border box (encloses all 4 sub-layers) -->
+<rect x="60" y="510" width="242" height="294" rx="10"
+      fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 3"/>
+<text x="290" y="528" text-anchor="end" font-size="12" font-weight="700" fill="#475569">N×</text>
+
+<!-- ── Sub-layer 4 (top): Add & Norm ── -->
+<rect x="78" y="530" width="206" height="36" rx="8"
+      fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+<text x="181" y="553" text-anchor="middle" font-size="11.5" font-weight="600" fill="#a7f3d0">Add &amp; Norm</text>
+
+<!-- ── Sub-layer 3: Feed Forward Network ── -->
+<rect x="78" y="594" width="206" height="50" rx="8"
+      fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="181" y="615" text-anchor="middle" font-size="11.5" font-weight="600" fill="#dbeafe">Feed Forward</text>
+<text x="181" y="632" text-anchor="middle" font-size="11.5" font-weight="600" fill="#dbeafe">Network</text>
+
+<!-- ── Sub-layer 2: Add & Norm ── -->
+<rect x="78" y="662" width="206" height="36" rx="8"
+      fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+<text x="181" y="685" text-anchor="middle" font-size="11.5" font-weight="600" fill="#a7f3d0">Add &amp; Norm</text>
+
+<!-- ── Sub-layer 1 (bottom): Multi-Head Self-Attention ── -->
+<rect x="78" y="716" width="206" height="52" rx="8"
+      fill="#78350f" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="181" y="737" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fef3c7">Multi-Head</text>
+<text x="181" y="754" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fef3c7">Self-Attention</text>
+
+<!-- ── Positional Encoding ── -->
+<circle cx="181" cy="840" r="22" fill="#0f172a" stroke="#818cf8" stroke-width="2"/>
+<text x="181" y="847" text-anchor="middle" font-size="20" fill="#818cf8">⊕</text>
+<text x="210" y="836" font-size="9" fill="#64748b">Positional</text>
+<text x="210" y="848" font-size="9" fill="#64748b">Encoding</text>
+
+<!-- ── Input Embedding ── -->
+<rect x="96" y="872" width="170" height="38" rx="8"
+      fill="#312e81" stroke="#818cf8" stroke-width="1.5"/>
+<text x="181" y="896" text-anchor="middle" font-size="11.5" font-weight="600" fill="#e0e7ff">Input Embedding</text>
+
+<!-- ── "Inputs" label ── -->
+<text x="181" y="936" text-anchor="middle" font-size="13" fill="#94a3b8">Inputs</text>
+<!-- small down-tick -->
+<line x1="181" y1="938" x2="181" y2="945" stroke="#334155" stroke-width="1.5"/>
+
+<!-- ── Encoder vertical arrows (data flows bottom → top = high y → low y) ── -->
+<line x1="181" y1="933" x2="181" y2="914" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Embedding top (y=872) → Pos Enc bottom (cy=840, r=22 → bottom y=862) -->
+<line x1="181" y1="872" x2="181" y2="866" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Pos Enc top (y=818) → Attention bottom (y=768) -->
+<line x1="181" y1="818" x2="181" y2="772" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Attention top (y=716) → Add&Norm2 bottom (y=698) -->
+<line x1="181" y1="716" x2="181" y2="702" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Add&Norm2 top (y=662) → FFN bottom (y=644) -->
+<line x1="181" y1="662" x2="181" y2="648" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- FFN top (y=594) → Add&Norm1 bottom (y=566) -->
+<line x1="181" y1="594" x2="181" y2="570" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Add&Norm1 top (y=530) → upward, represents encoder output -->
+<line x1="181" y1="530" x2="181" y2="460" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- "Encoder Output" label -->
+<text x="181" y="448" text-anchor="middle" font-size="9.5" fill="#475569">encoder</text>
+<text x="181" y="460" text-anchor="middle" font-size="9.5" fill="#475569">output</text>
+
+<!-- ── Residual (skip) connections ── -->
+<!-- Skip over Attention → Add&Norm2 -->
+<path d="M78,742 C50,742 50,680 78,680"
+      fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+<!-- Skip over FFN → Add&Norm1 -->
+<path d="M78,619 C46,619 46,548 78,548"
+      fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                      DECODER                           -->
+<!--                  center x = 638                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<!-- Section label -->
+<text x="638" y="48" text-anchor="middle" font-size="15" font-weight="700"
+      fill="#94a3b8" letter-spacing="0.12em">DECODER</text>
+
+<!-- N× dashed border box (encloses all 6 sub-layers) -->
+<rect x="516" y="330" width="244" height="478" rx="10"
+      fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 3"/>
+<text x="748" y="348" text-anchor="end" font-size="12" font-weight="700" fill="#475569">N×</text>
+
+<!-- ── Sub-layer 6 (top): Add & Norm ── -->
+<rect x="533" y="352" width="210" height="36" rx="8"
+      fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+<text x="638" y="375" text-anchor="middle" font-size="11.5" font-weight="600" fill="#a7f3d0">Add &amp; Norm</text>
+
+<!-- ── Sub-layer 5: Feed Forward Network ── -->
+<rect x="533" y="406" width="210" height="50" rx="8"
+      fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="638" y="427" text-anchor="middle" font-size="11.5" font-weight="600" fill="#dbeafe">Feed Forward</text>
+<text x="638" y="444" text-anchor="middle" font-size="11.5" font-weight="600" fill="#dbeafe">Network</text>
+
+<!-- ── Sub-layer 4: Add & Norm ── -->
+<rect x="533" y="474" width="210" height="36" rx="8"
+      fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+<text x="638" y="497" text-anchor="middle" font-size="11.5" font-weight="600" fill="#a7f3d0">Add &amp; Norm</text>
+
+<!-- ── Sub-layer 3: Multi-Head Cross-Attention ── -->
+<rect x="533" y="528" width="210" height="58" rx="8"
+      fill="#78350f" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="638" y="549" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fef3c7">Multi-Head</text>
+<text x="638" y="566" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fef3c7">Cross-Attention</text>
+<text x="638" y="580" text-anchor="middle" font-size="9.5" fill="#fcd34d">(K, V from Encoder)</text>
+
+<!-- ── Sub-layer 2: Add & Norm ── -->
+<rect x="533" y="604" width="210" height="36" rx="8"
+      fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+<text x="638" y="627" text-anchor="middle" font-size="11.5" font-weight="600" fill="#a7f3d0">Add &amp; Norm</text>
+
+<!-- ── Sub-layer 1 (bottom): Masked Multi-Head Self-Attention ── -->
+<rect x="533" y="658" width="210" height="52" rx="8"
+      fill="#7c2d12" stroke="#fb923c" stroke-width="1.5"/>
+<text x="638" y="679" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffedd5">Masked Multi-Head</text>
+<text x="638" y="696" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffedd5">Self-Attention</text>
+
+<!-- ── Positional Encoding ── -->
+<circle cx="638" cy="840" r="22" fill="#0f172a" stroke="#818cf8" stroke-width="2"/>
+<text x="638" y="847" text-anchor="middle" font-size="20" fill="#818cf8">⊕</text>
+<text x="667" y="836" font-size="9" fill="#64748b">Positional</text>
+<text x="667" y="848" font-size="9" fill="#64748b">Encoding</text>
+
+<!-- ── Output Embedding ── -->
+<rect x="553" y="872" width="170" height="38" rx="8"
+      fill="#312e81" stroke="#818cf8" stroke-width="1.5"/>
+<text x="638" y="896" text-anchor="middle" font-size="11.5" font-weight="600" fill="#e0e7ff">Output Embedding</text>
+
+<!-- ── "Outputs" label ── -->
+<text x="638" y="934" text-anchor="middle" font-size="13" fill="#94a3b8">Outputs</text>
+<text x="638" y="950" text-anchor="middle" font-size="10" fill="#64748b">(shifted right)</text>
+<line x1="638" y1="938" x2="638" y2="945" stroke="#334155" stroke-width="1.5"/>
+
+<!-- ── Above Decoder N× box ── -->
+<!-- Linear -->
+<rect x="558" y="238" width="160" height="42" rx="8"
+      fill="#4c1d95" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="638" y="264" text-anchor="middle" font-size="12" font-weight="600" fill="#ede9fe">Linear</text>
+
+<!-- Softmax -->
+<rect x="558" y="164" width="160" height="42" rx="8"
+      fill="#701a75" stroke="#e879f9" stroke-width="1.5"/>
+<text x="638" y="190" text-anchor="middle" font-size="12" font-weight="600" fill="#fae8ff">Softmax</text>
+
+<!-- Output Probabilities -->
+<text x="638" y="140" text-anchor="middle" font-size="11.5" font-weight="600" fill="#f8fafc">Output</text>
+<text x="638" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#f8fafc">Probabilities</text>
+<line x1="638" y1="106" x2="638" y2="100" stroke="#334155" stroke-width="1.5"/>
+
+<!-- ── Decoder vertical arrows ── -->
+<!-- Outputs → Embedding -->
+<line x1="638" y1="933" x2="638" y2="914" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Embedding → Pos Enc -->
+<line x1="638" y1="872" x2="638" y2="866" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Pos Enc → Masked Attention bottom (y=710) -->
+<line x1="638" y1="818" x2="638" y2="714" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Masked Attention top (y=658) → Add&Norm2 bottom (y=640) -->
+<line x1="638" y1="658" x2="638" y2="644" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Add&Norm2 top (y=604) → Cross-Attention bottom (y=586) -->
+<line x1="638" y1="604" x2="638" y2="590" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Q label on this arrow -->
+<text x="625" y="598" font-size="10" font-weight="700" fill="#fbbf24">Q</text>
+<!-- Cross-Attention top (y=528) → Add&Norm3 bottom (y=510) -->
+<line x1="638" y1="528" x2="638" y2="514" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Add&Norm3 top (y=474) → FFN bottom (y=456) -->
+<line x1="638" y1="474" x2="638" y2="460" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- FFN top (y=406) → Add&Norm4 bottom (y=388) -->
+<line x1="638" y1="406" x2="638" y2="392" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Add&Norm4 top (y=352) → Linear bottom (y=280) -->
+<line x1="638" y1="352" x2="638" y2="284" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Linear top (y=238) → Softmax bottom (y=206) -->
+<line x1="638" y1="238" x2="638" y2="210" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Softmax top (y=164) → Output Probs -->
+<line x1="638" y1="164" x2="638" y2="148" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ── Decoder residual (skip) connections ── -->
+<!-- Skip over Masked-Attention → Add&Norm2 -->
+<path d="M533,684 C500,684 500,622 533,622"
+      fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+<!-- Skip over Cross-Attention → Add&Norm3 -->
+<path d="M533,557 C495,557 495,492 533,492"
+      fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+<!-- Skip over FFN → Add&Norm4 -->
+<path d="M533,431 C494,431 494,370 533,370"
+      fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--         ENCODER → DECODER  cross-attention arrow       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--
+     Encoder output exits at right of Add&Norm (top) center:
+       x=284, y=548  (center of Add&Norm1 at y=530+18=548)
+     Decoder Cross-Attention left edge center:
+       x=533, y=557  (center of Cross-Attn at y=528+29=557)
+-->
+<path d="M284,548 C420,548 420,557 533,557"
+      fill="none" stroke="#d97706" stroke-width="2"
+      stroke-dasharray="6 3" marker-end="url(#arr-gold)"/>
+<text x="400" y="538" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d97706">K, V</text>
+
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                      LEGEND                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<rect x="296" y="670" width="218" height="170" rx="10"
+      fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+<text x="405" y="692" text-anchor="middle" font-size="10.5" font-weight="700"
+      fill="#64748b" letter-spacing="0.08em">LEGEND</text>
+
+<!-- Row 1: Attention -->
+<rect x="308" y="702" width="14" height="12" rx="3" fill="#78350f" stroke="#f59e0b" stroke-width="1"/>
+<text x="328" y="713" font-size="10" fill="#94a3b8">Attention Layer</text>
+
+<!-- Row 2: Masked Attention -->
+<rect x="308" y="721" width="14" height="12" rx="3" fill="#7c2d12" stroke="#fb923c" stroke-width="1"/>
+<text x="328" y="732" font-size="10" fill="#94a3b8">Masked Attention Layer</text>
+
+<!-- Row 3: Add & Norm -->
+<rect x="308" y="740" width="14" height="12" rx="3" fill="#064e3b" stroke="#34d399" stroke-width="1"/>
+<text x="328" y="751" font-size="10" fill="#94a3b8">Add &amp; Norm</text>
+
+<!-- Row 4: FFN -->
+<rect x="308" y="759" width="14" height="12" rx="3" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+<text x="328" y="770" font-size="10" fill="#94a3b8">Feed Forward Network</text>
+
+<!-- Row 5: Embedding -->
+<rect x="308" y="778" width="14" height="12" rx="3" fill="#312e81" stroke="#818cf8" stroke-width="1"/>
+<text x="328" y="789" font-size="10" fill="#94a3b8">Embedding</text>
+
+<!-- Row 6: Linear / Softmax -->
+<rect x="308" y="797" width="14" height="12" rx="3" fill="#4c1d95" stroke="#a78bfa" stroke-width="1"/>
+<text x="328" y="808" font-size="10" fill="#94a3b8">Linear / Softmax</text>
+
+<!-- Row 7: Residual -->
+<line x1="308" y1="821" x2="322" y2="821" stroke="#4e6fb5" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="328" y="825" font-size="10" fill="#94a3b8">Residual Connection</text>
+
+<!-- Row 8: Enc→Dec -->
+<line x1="308" y1="839" x2="322" y2="839" stroke="#d97706" stroke-width="1.5" stroke-dasharray="6 3"/>
+<text x="328" y="843" font-size="10" fill="#94a3b8">Encoder Output (K, V)</text>
+
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--          Subtle vertical divider                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<line x1="420" y1="68" x2="420" y2="808" stroke="#1e293b" stroke-width="1" stroke-dasharray="3 5"/>
+
+</svg>
+</div>
+
+<footer style="margin-top:2rem; font-size:0.78rem; color:#334155; text-align:center;">
+  Namaste AI · Episode-06 · The Computational Brain of Machines
+</footer>
+</body>
+</html>
