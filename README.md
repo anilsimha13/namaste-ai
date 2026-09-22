@@ -114,3 +114,14 @@
 - `Generalization`: Generalization refers to the ability of a trained neural network to perform well on unseen data. A model that generalizes well can make accurate predictions on new inputs, while a model that overfits may perform poorly on unseen data. Techniques such as regularization, dropout, and early stopping are used to improve generalization and prevent overfitting.
 - `Overfitting`: Overfitting occurs when a neural network learns the training data too well, capturing noise and irrelevant patterns that do not generalize to new data. This can lead to poor performance on unseen inputs. To mitigate overfitting, techniques such as cross-validation, regularization, and data augmentation are employed.
 - `Distributed Training`: Distributed training involves training a neural network across multiple devices or machines to speed up the training process and handle larger datasets. Techniques such as data parallelism and model parallelism are used to distribute the workload and synchronize updates across devices.
+
+#### Episode-08 | From a Base Model to an AI Assistant
+
+- _ Pre-training_ : Pre-training is the initial phase of training a large language model, where the model is exposed to a vast amount of text data to learn general language patterns and representations. During pre-training, the model learns to predict the next word in a sentence or fill in missing words, allowing it to capture syntactic and semantic information from the text.
+
+- `Common Crawl`: Common Crawl is a non-profit organization that provides an open repository of web crawl data. It collects and stores web pages from the internet, making it available for research and analysis. The data includes raw HTML, text content, and metadata, which can be used for various applications, including training large language models.
+- `Fine-Web`: Fine-Web refers to the process of fine-tuning a pre-trained language model on a specific dataset or domain to improve its performance on tasks relevant to that domain. Fine-tuning allows the model to adapt its knowledge and generate more accurate and contextually appropriate outputs for the target application.
+
+- `Reinforcement Learning from Human Feedback (RLHF)`: RLHF is a technique used to improve the performance of language models by incorporating feedback from human evaluators. In this approach, the model generates outputs, and human evaluators provide feedback on the quality and relevance of those outputs. The model is then updated based on this feedback to align its behavior with human preferences and expectations.
+
+- `Supervised Fine-Tuning (SFT)`: Supervised fine-tuning is a process where a pre-trained language model is further trained on a labeled dataset with specific input-output pairs. This allows the model to learn task-specific patterns and improve its performance on the target task. SFT is often used in conjunction with RLHF to enhance the model's capabilities.
