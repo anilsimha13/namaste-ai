@@ -16,6 +16,8 @@
 - Season 2
   - [Episode-01 | Fundamentals of Building with AI](#episode-01--fundamentals-of-building-with-ai)
   - [Episode-02 | Ideation & Brainstorming Features using AI](#episode-02--ideation--brainstorming-features-using-ai)
+  - [Episode-03 | Product Requirements Documentation using AI](#episode-03--product-requirements-documentation-using-ai)
+  - [Episode-04 | System Design Architecture Documentation using AI](#episode-04--system-design-architecture-documentation-using-ai)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -160,3 +162,11 @@
 #### Episode-02 | Ideation & Brainstorming Features using AI
 
 - Created the Requirement Document for the AI Application by providing high-level requirements and features to the AI tool and it generated a detailed requirement document with features, user stories, and acceptance criteria.
+
+#### Episode-03 | Product Requirements Documentation using AI
+
+- Created PRD (Product Requirement Document) for the AI Application by providing high-level requirements and features to the AI tool and it generated a detailed PRD with features, user stories, and acceptance criteria.
+
+#### Episode-04 | System Design Architecture Documentation using AI
+
+- Created System Design Architecture Document for the AI Application by providing high-level requirements and features to the AI tool and it generated a detailed System Design Architecture Document with features, user stories, and acceptance criteria.
