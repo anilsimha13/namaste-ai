@@ -18,6 +18,7 @@
   - [Episode-02 | Ideation & Brainstorming Features using AI](#episode-02--ideation--brainstorming-features-using-ai)
   - [Episode-03 | Product Requirements Documentation using AI](#episode-03--product-requirements-documentation-using-ai)
   - [Episode-04 | System Design Architecture Documentation using AI](#episode-04--system-design-architecture-documentation-using-ai)
+  - [Episode-05 | Database and API Design Documentation using AI](#episode-05--database-and-api-design-documentation-using-ai)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -170,3 +171,9 @@
 #### Episode-04 | System Design Architecture Documentation using AI
 
 - Created System Design Architecture Document for the AI Application by providing high-level requirements and features to the AI tool and it generated a detailed System Design Architecture Document with features, user stories, and acceptance criteria.
+
+#### Episode-05 | Database and API Design Documentation using AI
+
+- Created and reviewed DB design and API design Documents
+
+#### Episode-06 | UI & UX Design using AI
