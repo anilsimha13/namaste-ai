@@ -19,6 +19,7 @@
   - [Episode-03 | Product Requirements Documentation using AI](#episode-03--product-requirements-documentation-using-ai)
   - [Episode-04 | System Design Architecture Documentation using AI](#episode-04--system-design-architecture-documentation-using-ai)
   - [Episode-05 | Database and API Design Documentation using AI](#episode-05--database-and-api-design-documentation-using-ai)
+  - [Episode-06 | UI & UX Design using AI](#episode-06--ui--ux-design-using-ai)
 
 #### Episode-01 | Welcome to Namaste AI
 
@@ -177,3 +178,5 @@
 - Created and reviewed DB design and API design Documents
 
 #### Episode-06 | UI & UX Design using AI
+
+- Created the whole design of an application using Google Stitch by generating the prompt in Claude
